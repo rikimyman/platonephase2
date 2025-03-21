@@ -43,6 +43,269 @@
     --border-color: #dddddd;
     --hover-color: rgba(0, 0, 0, 0.05);
   }
+  /* Add these styles at the top of your CSS to prevent horizontal scrolling on mobile */
+/* Prevent horizontal scrolling while preserving all UI elements */
+.html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix container widths */
+.container, .trending, .sentiment-grid, .global-stats-container {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Fix the section heading */
+.section-heading {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 15px; /* Reduced horizontal padding */
+  border: 2px solid var(--cardbg);
+  border-radius: 34px;
+  display: block;
+  width: auto;
+  max-width: 90%;
+  background: transparent;
+  color: var(--text-secondary);
+}
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
+}
+
+
+.hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.98);
+  z-index: 1000;
+  padding: 80px 20px 20px;
+  flex-direction: column;
+  gap: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.mobile-nav a, .mobile-nav button {
+  padding: 15px;
+  font-size: 18px;
+  text-align: left;
+  border-radius: 12px;
+  background-color: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav a:hover, .mobile-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding-left: 25px;
+}
+
+.mobile-nav.active {
+  display: flex;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+/* Improved hamburger menu styles */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
+}
+
+/* Add this specific selector to target the login button in the header */
+@media (max-width: 768px) {
+  .header-right .button, 
+  .header-right a.button,
+  .header-right .login-button,
+  .header-right a[href="#"].button {
+    display: none !important;
+  }
+  
+  .hamburger-menu {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-center {
+    display: none; /* Hide regular navigation on mobile */
+  }
+  
+  .hamburger-menu {
+    display: flex; /* Show hamburger on mobile */
+  }
+  
+  /* Hide login and other buttons on mobile */
+  .login-button,
+  .signup-button,
+  .nav-button,
+  .header-right .login-button,
+  .header-right .signup-button,
+  .header-right .nav-button {
+    display: none !important; /* Force hide with !important */
+  }
+  
+  /* Keep only essential elements visible in header */
+  .header-container {
+    justify-content: space-between;
+  }
+  
+  /* Keep theme switcher visible */
+  .theme-switch {
+    display: block;
+  }
+}
+
+/* Add no-scroll class to prevent background scrolling when menu is open */
+body.no-scroll {
+  overflow: hidden;
+}
+/* Responsive adjustments for header elements */
+@media (max-width: 768px) {
+  /* Header container */
+  .header-container {
+    padding: 8px 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  /* Logo and brand */
+  .brand-logo {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Search bar */
+  .search-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 8px 0;
+    order: 3; /* Move search below header on mobile */
+  }
+  
+  /* Theme switcher */
+  .theme-switch {
+    transform: scale(0.8);
+    margin-right: 5px;
+  }
+  
+  /* Profile/user elements */
+  .user-controls {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* Trending container */
+  .trending-container {
+    margin-left: 0;
+    padding: 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+  
+  /* Fix any other containers */
+  .sentiment-grid, .global-stats-container {
+    padding: 0 10px;
+  }
+  
+  /* BTC dominance and other stats */
+  #btc-dominance, .global-stat-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Day range elements */
+  .price-range {
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Ensure all charts fit within container */
+  canvas {
+    max-width: 100%;
+  }
+}
+
+/* Extra small devices (phones) */
+@media (max-width: 480px) {
+  /* Further optimize for very small screens */
+  .header-container {
+    padding: 5px;
+  }
+  
+  /* Make buttons and controls smaller */
+  button, select, input {
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Ensure trending cards fit properly */
+  .trending-card {
+    margin: 1px 0;
+    padding: 6px 4px;
+    width: 49.5%;
+    flex: 0 0 49.5%;
+    border-width: 1px;
+    box-sizing: border-box;
+  }
+  
+  /* Adjust chart sizes */
+  .trending-chart canvas {
+    width: 100% !important;
+    height: 50px !important;
+  }
+}
     
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
     body { background-color: var(--primary-bg); color: var(--text-primary); }
@@ -292,6 +555,82 @@
       box-shadow: var(--card-shadow); cursor: pointer; transition: transform 0.2s;
       position: relative;
     }
+    /* Add these styles to your CSS section */
+.trending-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.trending-header img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.trending-header span {
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trending-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trending-price {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.trending-percentage {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.trending-percentage.positive {
+  color: #2ed573;
+}
+
+.trending-percentage.negative {
+  color: #ff4757;
+}
+
+.mcap-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.mcap-label {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.trending-marketcap {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.trending-chart {
+  margin-top: 5px;
+  height: 60px;
+}
     .trending-card:hover { transform: translateY(-5px); }
     .trending-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
     .trending-header img { width: 32px; height: 32px; border-radius: 50%; }
@@ -868,7 +1207,7 @@
 .trending-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0; /* Removed gap completely */
+  gap: 15px; /* Added gap for larger screens */
   padding: 0 45px;
   margin-left: 145px;
   justify-content: flex-start;
@@ -877,47 +1216,87 @@
 .trending-card {
   background: transparent;
   color: var(--text-primaryrgb);
-  padding: 10px;
+  padding: 8px 5px; /* Reduced padding */
   width: 209px;
   border: 2.5px solid var(--cardbg);
   border-radius: px;
-  margin: 5px 0; /* Reduced vertical margin and removed horizontal margin */
+  margin: 5px 0;
   flex: 0 0 209px;
 }
 
 /* For mobile devices, reduce spacing even further */
 /* For mobile devices, reduce spacing even further */
+/* For mobile devices, reduce spacing */
 @media (max-width: 768px) {
   .trending-container {
-    gap: 0;
+    gap: 10px; /* Reduced gap for medium screens */
     padding: 0 5px;
     margin-left: 5px;
   }
   
   .trending-card {
-    margin: 5px 0; /* Consistent with desktop */
+    padding: 6px 4px;
   }
+  
+  .coin-name {
+    font-size: 13px;
+  }
+  
+  .coin-price {
+    font-size: 12px;
+  }
+}
+/* Add this CSS for the ranking badge */
+/* Add this CSS for a more subtle ranking badge */
+/* Update the rank badge positioning */
+.rank-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.7;
+  z-index: 2;
+  background: transparent;
+  border: none;
+}
+
+.rank-badge.top-3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  opacity: 0.85;
 }
 
 @media (max-width: 480px) {
-  .trending-card {
-    margin: 5px 0; /* Reduced vertical margin from 8px to 5px and horizontal to 0 */
-    padding: 8px 5px; /* Reduced padding */
-    width: 100%; /* Make cards take full width */
-    flex: 0 0 calc(50% - 2px); /* Two cards per row with minimal gap */
+  .trending-container {
+    gap: 0;
+    padding: 0;
+    margin-left: 0;
+    justify-content: space-around; /* Changed from space-between to space-around */
+    width: 100%;
   }
   
-  .trending-container {
-    padding: 0;
-    gap: 0; /* Remove gap completely */
-    margin-left: 0; /* Remove left margin */
-    justify-content: center; /* Center the cards */
+  .trending-card {
+    margin: 1px 0; /* Simplified margin */
+    padding: 6px 4px;
+    width: 49.8%; /* Increased from 49.5% to 49.8% to make cards wider */
+    flex: 0 0 49.8%; /* Match the width */
+    border-width: 1px; /* Thinner border */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
   }
   
   /* Adjust the chart size for smaller screens */
   .trending-chart canvas {
     width: 100% !important;
     height: 50px !important;
+  }
+  
+  /* Make rank badge smaller on mobile */
+  .rank-badge {
+    top: 6px;
+    right: 8px;
+    font-size: 10px;
   }
 }
 
@@ -2469,6 +2848,70 @@ gauge-container {
     width: 20px;
     height: 20px;
   }
+
+/* Add styles for the optimized coin info layout */
+.coin-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.coin-name-symbol {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.coin-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.coin-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.coin-symbol {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-left: 4px;
+}
+
+.coin-price-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.coin-price {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.coin-change {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+.coin-change.positive {
+  color: #2ed573;
+}
+
+.coin-change.negative {
+  color: #ff4757;
+}
+
+.coin-market-cap {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
   
   .coin-name {
     font-size: 12px;
@@ -2529,11 +2972,13 @@ gauge-container {
   .trending-card {
   background: transparent;
   color: var(--text-primaryrgb);
-  padding: 10px;
+  padding: 8px 5px; /* Reduced padding */
   width: 209px;
   border: 2.5px solid var(--cardbg);
   border-radius: px;
-  margin: 10px 3px; /* Reduced horizontal margin from 10px to 3px */
+  margin: 5px 0;
+  flex: 0 0 209px;
+} /* Reduced horizontal margin from 10px to 3px */
 }
   
   /* Increase font sizes slightly since we have more space per card */
@@ -2558,9 +3003,9 @@ gauge-container {
   
   /* Make charts slightly taller */
   .trending-chart canvas {
-    height: 35px !important;
+    height: 50px !important;
   }
-}
+
 
 /* For extremely small screens, ensure the 2-card layout works well */
 @media (max-width: 360px) {
@@ -3150,6 +3595,24 @@ gauge-container {
           <div style="font-weight:bold">Platone </div>
         </div>
       </div>
+      <!-- Add this right after the opening of header-container div -->
+<div class="hamburger-menu">
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+</div>
+
+<!-- Add this right before the closing of header-container div -->
+<!-- Improved mobile navigation -->
+<div class="mobile-nav">
+  <a href="#"><i class="fas fa-coins"></i> Cryptocurrencies</a>
+  <a href="#"><i class="fas fa-chart-line"></i> Deep Charts</a>
+  <a href="#"><i class="fas fa-chart-pie"></i> ETF</a>
+  <a href="#"><i class="fas fa-newspaper"></i> News</a>
+  <a href="#"><i class="fas fa-box"></i> Products</a>
+  <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
+  <a href="#"><i class="fas fa-user-plus"></i> Sign Up</a>
+</div>
       <div class="header-center">
         <nav>
           <a href="#trending" class="button">Cryptocurrencies</a>
@@ -3725,7 +4188,27 @@ function updateWhaleTradesDisplay() {
     container.appendChild(tradeItem);
   });
 }
-
+// Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.querySelector('.hamburger-menu');
+  const mobileNav = document.querySelector('.mobile-nav');
+  
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    document.body.classList.toggle('no-scroll'); // Prevent scrolling when menu is open
+  });
+  
+  // Close menu when clicking on a link
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav a, .mobile-nav button');
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('active');
+      mobileNav.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    });
+  });
+});
 // Function to update PNL in real-time
 function updatePNL(currentPrice) {
   document.querySelectorAll('.whale-trade-item').forEach(item => {
@@ -4032,7 +4515,8 @@ document.head.appendChild(style);
     let currentCoinPrice = 0;
 
     // Initialize Trending Coin Cards
-    trendingCoins.forEach((coin, index) => {
+   // Find this code in your trendingCoins.forEach function
+trendingCoins.forEach((coin, index) => {
   const card = document.createElement('div');
   let longPressTriggered = false;
   let pressTimer;
@@ -4051,19 +4535,26 @@ document.head.appendChild(style);
   card.className = 'trending-card';
   card.setAttribute('data-coin', coin.name);
   card.innerHTML = `
+    <div class="rank-badge ${index < 3 ? 'top-3' : ''}">#${index + 1}</div>
     <div class="trending-header">
       <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/${coin.id}.png" alt="${coin.name}">
       <span>${coin.name}</span>
     </div>
     <div class="trending-details">
-      <div>Price: <strong class="trending-price" data-prev="0">--</strong></div>
-      <div>Change: <strong class="trending-percentage" data-prev="0">--</strong></div>
-      <div>Market Cap: <strong class="trending-marketcap" data-prev="0">--</strong></div>
+      <div class="price-container">
+        <strong class="trending-price" data-prev="0">--</strong>
+        <span class="trending-percentage" data-prev="0">--</span>
+      </div>
+      <div class="mcap-container">
+        <span class="mcap-label">MCap:</span>
+        <strong class="trending-marketcap" data-prev="0">--</strong>
+      </div>
     </div>
     <div class="trending-chart">
       <canvas id="trending-chart-${index}" width="200" height="100"></canvas>
     </div>
   `;
+  // Rest of your code...
       trendingContainer.appendChild(card);
       trendingCardsMap[coin.name] = card;
       card.addEventListener('click', function(e) {
@@ -5815,6 +6306,7 @@ function updateSqueezeValue(value) {
     squeezeFill.offsetHeight;
   }
 }
+
   </script>
 </body>
 </html>
