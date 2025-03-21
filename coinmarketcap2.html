@@ -214,14 +214,7 @@
 }
 
 /* Ensure the container is properly sized */
-.global-stats-container {
-  width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 0 16px;
-}
+
 
 /* Fix BTC dominance specific styling */
 #btc-dominance {
@@ -862,7 +855,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px; /* Increased from 15px */
-  padding: 0 24px; /* Increased from 16px */
+  padding: 0 5px; /* Increased from 16px */
 }
 
 /* Trending Cards - Adding spacing from edges */
@@ -871,13 +864,14 @@
   padding: 0 15px; /* Added padding on left and right */
 }
 
+/* Reduce spacing between trending cards */
 .trending-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 0; /* Removed gap completely */
   padding: 0 45px;
-  margin-left: 145px; /* Add left margin to align with search container and filter buttons */
-  justify-content: flex-start; /* Change from center to flex-start */
+  margin-left: 145px;
+  justify-content: flex-start;
 }
 
 .trending-card {
@@ -887,9 +881,44 @@
   width: 209px;
   border: 2.5px solid var(--cardbg);
   border-radius: px;
-  margin: 10px;
-  /* Add this to ensure consistent spacing */
-  flex: 0 0 209px; /* Don't grow, don't shrink, fixed width */
+  margin: 5px 0; /* Reduced vertical margin and removed horizontal margin */
+  flex: 0 0 209px;
+}
+
+/* For mobile devices, reduce spacing even further */
+/* For mobile devices, reduce spacing even further */
+@media (max-width: 768px) {
+  .trending-container {
+    gap: 0;
+    padding: 0 5px;
+    margin-left: 5px;
+  }
+  
+  .trending-card {
+    margin: 5px 0; /* Consistent with desktop */
+  }
+}
+
+@media (max-width: 480px) {
+  .trending-card {
+    margin: 5px 0; /* Reduced vertical margin from 8px to 5px and horizontal to 0 */
+    padding: 8px 5px; /* Reduced padding */
+    width: 100%; /* Make cards take full width */
+    flex: 0 0 calc(50% - 2px); /* Two cards per row with minimal gap */
+  }
+  
+  .trending-container {
+    padding: 0;
+    gap: 0; /* Remove gap completely */
+    margin-left: 0; /* Remove left margin */
+    justify-content: center; /* Center the cards */
+  }
+  
+  /* Adjust the chart size for smaller screens */
+  .trending-chart canvas {
+    width: 100% !important;
+    height: 50px !important;
+  }
 }
 
 /* Add spacing to the section heading for trending */
@@ -995,15 +1024,17 @@
       border: 1px solid #ccc;
     }
     .card-container { position: relative; }
-    .trending-card {
-      background: transparent ;
-      color: var(--text-primaryrgb);
-      padding: 10px;
-      width: 209px;
-      border: 2.5px solid var(--cardbg);
-      border-radius: px;
-      margin: 10px;
-    }
+/* Delete or comment out this duplicate definition:
+.trending-card {
+  background: transparent;
+  color: var(--text-primaryrgb);
+  padding: 10px;
+  width: 209px;
+  border: 2.5px solid var(--cardbg);
+  border-radius: px;
+  margin: 10px;
+}
+*/
     /* Fee Tracker Section Styles */
     #fee-tracker {
       width: fit-content;
@@ -1014,7 +1045,7 @@
       color: var(--text-primary);
       border: 1px solid var(--text-primary);
       border-radius:345px;
-      padding: 0.5rem 1.5rem;
+      padding: 5px;
       margin: 1rem 2rem;
     }
     #fee-tracker span {
@@ -1386,7 +1417,7 @@ gauge-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 0 16px;
+  padding: 0 5px;
 }
 
 /* Row Styles - Fix the grid layout */
@@ -1485,8 +1516,26 @@ gauge-container {
       color: #ffffff; /* Bright white for maximum visibility */
     }
   
+    @media (max-width: 768px) {
+  .squeeze-data-container, .buying-strength-container {
+    padding: 12px;
+    overflow: hidden; /* Prevent overflow on mobile */
+  }
+  
+  .squeeze-bar {
+    width: 100%; /* Ensure full width on mobile */
+  }
+  
+  .squeeze-fill {
+    transition: width 0.3s ease; /* Faster transition on mobile */
+  }
+  
+  .squeeze-labels {
+    font-size: 10px; /* Smaller font on mobile */
+  }
+}
     /* Responsive adjustments */
-@@media (max-width: 768px) {
+    @media (max-width: 768px) {
   .global-stats-row {
     grid-template-columns: 1fr; /* Stack on mobile */
   }
@@ -1709,13 +1758,16 @@ gauge-container {
   
   /* Adjust filter buttons */
   .theme-filter-buttons, .time-filter-buttons {
+    margin: 0;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 4px;
   }
   
   .theme-filter-btn, .time-filter-btn {
-    padding: 3px 6px;
+    padding: 4px 8px;
     font-size: 11px;
+    margin: 2px;
   }
 }
 
@@ -2391,10 +2443,11 @@ gauge-container {
   
   /* Make trending cards smaller to fit 3 per row */
   .trending-container {
-    gap: 8px;
-    padding: 0 10px;
-    margin-left: 0;
-    justify-content: center;
+    gap: 2px; /* Reduced horizontal gap */
+    padding: 0 5px;
+    margin: 0;
+    justify-content: space-between;
+    width: 100%;
   }
   
   .trending-card {
@@ -2408,8 +2461,9 @@ gauge-container {
   }
   
   .coin-info {
-    gap: 3px;
+    gap: 2px;
   }
+  
   
   .coin-logo {
     width: 20px;
@@ -2426,6 +2480,9 @@ gauge-container {
   .coin-symbol {
     font-size: 10px;
   }
+  .trending-chart {
+    margin-top: 3px;
+  }
   
   .coin-price {
     font-size: 12px;
@@ -2440,13 +2497,13 @@ gauge-container {
   
   .trending-chart canvas {
     width: 100% !important;
-    height: 40px !important;
+    height: 30px !important;
   }
   
   /* Adjust search and filter positioning */
   .search-container {
-    margin-left: 0;
-    max-width: 100%;
+    margin: 0 auto;
+    max-width: 95%;
   }
   
   .theme-filter-buttons {
@@ -2455,35 +2512,61 @@ gauge-container {
   }
   
   .section-heading {
-    padding: 8px 20px;
-    font-size: 15px;
+    padding: 6px 10px;
+    margin: 10px 5px;
+  }
+  .filter-controls {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
+
 /* Extra small devices - ensure 3 coins per row */
+/* Adjust trending cards to show 2 per row on very small screens */
 @media (max-width: 480px) {
+  /* Change from 3 to 2 cards per row */
   .trending-card {
-    width: 30%;
-    min-width: 90px;
-    padding: 6px;
-    margin: 3px;
+  background: transparent;
+  color: var(--text-primaryrgb);
+  padding: 10px;
+  width: 209px;
+  border: 2.5px solid var(--cardbg);
+  border-radius: px;
+  margin: 10px 3px; /* Reduced horizontal margin from 10px to 3px */
+}
+  
+  /* Increase font sizes slightly since we have more space per card */
+  .coin-name {
+    font-size: 12px;
   }
   
-  .coin-logo {
-    width: 18px;
-    height: 18px;
+  .coin-symbol {
+    font-size: 10px;
   }
   
-  .coin-name, .coin-price {
-    font-size: 11px;
+  .coin-price {
+    font-size: 12px;
+    margin-top: 3px;
   }
   
-  .coin-symbol, .coin-change {
-    font-size: 9px;
+  .coin-change {
+    font-size: 10px;
+    padding: 2px 4px;
+    margin-top: 3px;
   }
   
+  /* Make charts slightly taller */
   .trending-chart canvas {
     height: 35px !important;
+  }
+}
+
+/* For extremely small screens, ensure the 2-card layout works well */
+@media (max-width: 360px) {
+  .trending-card {
+    width: 48%;
+    padding: 6px 4px;
   }
 }
 
@@ -2735,20 +2818,22 @@ gauge-container {
   margin-bottom: 15px;
 }
 
-.squeeze-bar {
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 5px;
-}
-
 .squeeze-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #2ed573, #ffa502, #ff4757);
   border-radius: 5px;
   transition: width 0.5s ease;
+  max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+.squeeze-bar {
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+  position: relative; /* Add position relative */
 }
 
 .squeeze-labels {
@@ -5190,9 +5275,8 @@ async function updateSqueezeMetrics(symbol, timeframe = '1d') {
     document.getElementById('keltnerWidth').textContent = kcWidth.toFixed(2) + '%';
     document.getElementById('squeezeStrength').textContent = squeezeStrength.toFixed(2) + '%';
     
-    // Update squeeze bar
-    const squeezeBar = document.getElementById('squeezeValue');
-    squeezeBar.style.width = `${Math.min(squeezeStrength, 100)}%`;
+    // Update squeeze bar - FIXED: Use updateSqueezeValue function to ensure proper display
+    updateSqueezeValue(squeezeStrength);
     
     return { bbWidth, kcWidth, squeezeStrength };
   } catch (error) {
@@ -5707,7 +5791,30 @@ function closeDetails() {
     window.metricsInterval = null;
   }
 }
-
+// Add this to your JavaScript where you update the squeeze value
+function updateSqueezeValue(value) {
+  // Ensure value is between 0 and 100
+  const clampedValue = Math.max(0, Math.min(100, value));
+  
+  // Update the width of the squeeze fill element
+  const squeezeFill = document.getElementById('squeezeValue');
+  if (squeezeFill) {
+    // FIXED: Set the width directly as a percentage
+    squeezeFill.style.width = `${clampedValue}%`;
+    
+    // Update color based on value
+    if (clampedValue < 33) {
+      squeezeFill.style.background = 'linear-gradient(90deg, #2ed573, #2ed573)';
+    } else if (clampedValue < 66) {
+      squeezeFill.style.background = 'linear-gradient(90deg, #ffa502, #ffa502)';
+    } else {
+      squeezeFill.style.background = 'linear-gradient(90deg, #ff4757, #ff4757)';
+    }
+    
+    // ADDED: Force a reflow to ensure the width change is applied
+    squeezeFill.offsetHeight;
+  }
+}
   </script>
 </body>
 </html>
