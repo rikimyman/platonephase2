@@ -356,9 +356,15 @@
     }
     .button:hover { background: transparent; transform: translateY(-3px); border-color: var(--buttonbg); }
     .search-bar {
-      padding: 0.5rem 1rem; border-radius: 20px; background: transparent;
-      border: 2px solid var(--cardbg); color: var(--text-primary); outline: none;
-    }
+  padding: 0.4rem 0.8rem; /* Reduced from 0.5rem 1rem */
+  border-radius: 20px;
+  background: transparent;
+  border: 2px solid var(--cardbg);
+  color: var(--text-primary);
+  outline: none;
+  width: 80px; /* Add explicit width if not already defined */
+  font-size: 14px; /* Slightly smaller font size */
+}
     .header-right { position: relative; gap: 1rem; }
 
     /* Settings Button & Menu */
@@ -1224,13 +1230,17 @@
 }
 
 /* Reduce spacing between trending cards */
+/* Reduce spacing between trending cards */
 .trending-container {
   display: flex;
   flex-wrap: wrap;
   gap: 15px; /* Added gap for larger screens */
-  padding: 0 45px;
-  margin-left: 145px;
-  justify-content: flex-start;
+  padding: 0 15px; /* Reduced from 45px */
+  margin-left: 0; /* Removed the 145px margin */
+  justify-content: center; /* Changed from flex-start to center */
+  width: 100%; /* Make container take full width */
+  max-width: 1400px; /* Add a max-width for very large screens */
+  margin: 0 auto; /* Center the container */
 }
 
 .trending-card {
@@ -1245,25 +1255,42 @@
 }
 
 /* For mobile devices, reduce spacing even further */
-/* For mobile devices, reduce spacing even further */
-/* For mobile devices, reduce spacing */
 @media (max-width: 768px) {
   .trending-container {
-    gap: 10px; /* Reduced gap for medium screens */
-    padding: 0 5px;
-    margin-left: 5px;
+    gap: 5px; /* Reduced from 10px */
+    padding: 0;
+    margin-left: 0;
+    justify-content: space-between; /* Changed from center to space-between */
+    width: 100%;
   }
   
   .trending-card {
     padding: 6px 4px;
+    margin: 1px 0; /* Keep vertical margin only */
+    width: 49%; /* Adjusted to fit better with less space between */
+    flex: 0 0 49%; /* Match the width */
+    border-width: 1.5px;
   }
   
-  .coin-name {
-    font-size: 13px;
+  /* Adjust the chart size for smaller screens */
+  .trending-chart canvas {
+    width: 100% !important;
+    height: 50px !important;
+  }
+}
+@media (max-width: 480px) {
+  .trending-container {
+    gap: 2px; /* Further reduced gap */
+    padding: 0;
+    margin: 0;
+    width: 100%;
   }
   
-  .coin-price {
-    font-size: 12px;
+  .trending-card {
+    margin: 1px 0; /* Keep vertical margin only */
+    padding: 5px 3px;
+    flex: 0 0 49%;
+    border-width: 1px;
   }
 }
 /* Add this CSS for the ranking badge */
