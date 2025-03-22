@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     /* Global Styles */
-    html { scroll-behavior: smooth; }
+       /* Global Styles */
+       html { scroll-behavior: smooth; }
     :root {
     --primary-bg: #121212;
     --secondary-bg: #1e1e1e;
@@ -43,22 +44,35 @@
     --border-color: #dddddd;
     --hover-color: rgba(0, 0, 0, 0.05);
   }
+  
   /* Add these styles at the top of your CSS to prevent horizontal scrolling on mobile */
-/* Prevent horizontal scrolling while preserving all UI elements */
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
+  /* Prevent horizontal scrolling while preserving all UI elements */
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Added line-height for better spacing between text lines */
+  }
 
-/* Fix container widths */
-.container, .trending, .sentiment-grid, .global-stats-container {
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+  /* Add increased line spacing to common text elements */
+  p, div, span, li, td, th {
+    line-height: 1.6; /* Increased from default (usually around 1.2) */
+  }
+  
+  /* For headings, add a bit more spacing */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.4; /* Slightly less than paragraph text but still improved */
+    margin-bottom: 0.8em; /* Add more space below headings */
+  }
+  
+  /* Fix container widths */
+  .container, .trending, .sentiment-grid, .global-stats-container {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
 
 /* Fix the section heading */
 .section-heading {
@@ -85,18 +99,26 @@ html, body {
   height: 20px;
   cursor: pointer;
   z-index: 1001;
-  padding: 5px;
+  padding: 10px;
+  background-color: rgba(46, 46, 46, 0.6);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 
 .hamburger-line {
   width: 100%;
   height: 2px;
   background-color: var(--text-primary);
-  border-radius: 2px;
+  border-radius: 4px;
   transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+/* Mobile nav styles - update background color to use CSS variables */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -104,12 +126,14 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(18, 18, 18, 0.98);
+  background-color: rgba(18, 18, 18, 0.85);
   z-index: 1000;
   padding: 80px 20px 20px;
   flex-direction: column;
   gap: 15px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-nav a, .mobile-nav button {
@@ -117,25 +141,34 @@ html, body {
   font-size: 18px;
   text-align: left;
   border-radius: 12px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.05);
   color: var(--text-primary);
   text-decoration: none;
   border: none;
   cursor: pointer;
   transition: all 0.3s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   width: 100%;
   display: flex;
   align-items: center;
+  gap: 12px;
+  margin-bottom: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.mobile-nav a:hover, .mobile-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.mobile-nav a:hover, .mobile-nav button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding-left: 25px;
+.hamburger-menu:hover {
+  background-color: rgba(73, 80, 87, 0.3);
+  transform: scale(1.05);
 }
 
 .mobile-nav.active {
   display: flex;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .hamburger-menu.active .hamburger-line:nth-child(1) {
@@ -162,53 +195,44 @@ html, body {
 }
 
 /* Add this specific selector to target the login button in the header */
+/* Add these styles to properly hide the main navigation on smaller screens */
 @media (max-width: 768px) {
-  .header-right .button, 
-  .header-right a.button,
-  .header-right .login-button,
-  .header-right a[href="#"].button {
+  /* Hide the main navigation in the header */
+  .header-center {
     display: none !important;
   }
   
+  /* Hide the login button in the header */
+  .header-right .button {
+    display: none !important;
+  }
+  
+  /* Make the search bar smaller */
+  .search-bar {
+    width: 120px;
+    margin-right: 10px;
+  }
+  
+  /* Ensure the hamburger menu is visible */
   .hamburger-menu {
-    display: flex;
+    display: flex !important;
+  }
+  
+  /* Adjust spacing for remaining header elements */
+  .header-right {
+    gap: 10px;
   }
 }
 
-
-@media (max-width: 768px) {
-  .header-center {
-    display: none; /* Hide regular navigation on mobile */
-  }
-  
+/* Make sure the hamburger menu is hidden on larger screens */
+@media (min-width: 769px) {
   .hamburger-menu {
-    display: flex; /* Show hamburger on mobile */
+    display: none !important;
   }
   
-  /* Hide login and other buttons on mobile */
-  .login-button,
-  .signup-button,
-  .nav-button,
-  .header-right .login-button,
-  .header-right .signup-button,
-  .header-right .nav-button {
-    display: none !important; /* Force hide with !important */
+  .mobile-nav {
+    display: none !important;
   }
-  
-  /* Keep only essential elements visible in header */
-  .header-container {
-    justify-content: space-between;
-  }
-  
-  /* Keep theme switcher visible */
-  .theme-switch {
-    display: block;
-  }
-}
-
-/* Add no-scroll class to prevent background scrolling when menu is open */
-body.no-scroll {
-  overflow: hidden;
 }
 /* Responsive adjustments for header elements */
 @media (max-width: 768px) {
@@ -1471,6 +1495,7 @@ body.no-scroll {
 }
 
 
+
 .gauge-container {
   position: relative;
   height: 200px;  /* Reduced height */
@@ -1791,17 +1816,15 @@ gauge-container {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   padding: 0 5px;
 }
 
-/* Row Styles - Fix the grid layout */
 .global-stats-row {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 15px;
+  grid-template-columns: 1fr 1fr; /* Two equal columns by default */
+  gap: 10px;
   width: 100%;
-  margin-bottom: 15px;
 }
 
 
@@ -1818,16 +1841,51 @@ gauge-container {
     }
   
     /* Card Styles */
-    .global-stat-card {
+  
+.global-stat-card {
   background: transparent;
-  border-radius: 15px;
-  padding: 15px;
+  border-radius: 12px;
+  padding: 12px;
   position: relative;
-  border: 2.5px solid var(--cardbg);
+  border: 2px solid var(--cardbg);
   height: 100%;
   width: 100%;
-  min-height: 80px;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.global-stat-card h3 {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.global-stat-card .stat-value {
+  font-size: 14px;
+}
+
+/* Specific styling for Fear Index */
+.fear-greed-gauge {
+  width: 100%;
+  height: auto;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.gauge-container {
+  height: 100px;
+}
+
+/* Day Range adjustments */
+.price-range {
+  padding: 12px;
+}
+
+.range-chart-container {
+  height: 50px;
+}
+
   
     /* Market Cap & Volume Styles */
     #global-marketcap, 
@@ -1891,186 +1949,150 @@ gauge-container {
       color: #ffffff; /* Bright white for maximum visibility */
     }
   
-    @media (max-width: 768px) {
-  .squeeze-data-container, .buying-strength-container {
-    padding: 12px;
-    overflow: hidden; /* Prevent overflow on mobile */
-  }
-  
-  .squeeze-bar {
-    width: 100%; /* Ensure full width on mobile */
-  }
-  
-  .squeeze-fill {
-    transition: width 0.3s ease; /* Faster transition on mobile */
-  }
-  
-  .squeeze-labels {
-    font-size: 10px; /* Smaller font on mobile */
-  }
-}
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-  .global-stats-row {
-    grid-template-columns: 1fr; /* Stack on mobile */
-  }
-}
-/* Mobile optimization - make everything smaller for phones */
+  /* Mobile-friendly market data components */
+/* Mobile-friendly market data components */
 @media (max-width: 768px) {
-  /* General sizing adjustments */
-  body {
-    font-size: 14px;
+  /* Other mobile styles remain unchanged */
+  
+  /* Improved BTC dominance box for mobile */
+  #btc-dominance {
+    min-height: auto !important;
+    height: 110px !important; /* Increased from 130px to 150px */
+    padding: 15px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent; /* Removed background */
+    border: 2px solid var(--cardbg); /* Standard border */
+    width: 100%; /* Maintain original width */
   }
   
-  /* Header adjustments */
-  .header-container {
-    padding: 8px;
+  #btc-dominance .btc-header {
+    position: static;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px; /* Reduced spacing */
+    gap: 6px; /* Reduced gap */
   }
   
-  .brand-logo {
-    width: 24px;
-    height: 24px;
+  #btc-dominance .btc-icon {
+    width: 28px; /* Smaller icon */
+    height: 28px;
   }
   
-  .header-center {
-    display: none; /* Hide navigation on mobile */
+  #btc-dominance .btc-name {
+    font-size: 18px; /* Smaller font */
+    font-weight: bold;
   }
   
-  /* Global stats adjustments */
+  #btc-dominance .mobile-only {
+    margin-top: 5px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #btc-dominance .mobile-only .stat-value {
+    display: block !important;
+    position: static !important;
+    text-align: center;
+    font-size: 28px !important; /* Smaller percentage */
+    font-weight: bold;
+    color: #f6db79;
+    margin: 0;
+    line-height: 1.2;
+  }
+  #btc-dominance .chart-container {
+    height: 100px !important; /* Increased height for the chart */
+    margin-top: 30px !important;
+  }
+  
+  /* Make the fear index match the BTC dominance height */
+  #fear-index-24h {
+    min-height: auto !important;
+    height: 150px !important; /* Match the new BTC dominance height */
+    padding: 15px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent;
+    border: 2px solid var(--cardbg);
+    width: 100%;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Control the internal elements that might be causing overflow */
+  #fear-index-24h .gauge-container {
+    height: 70px !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    max-height: 70px !important;
+    overflow: hidden !important;
+  }
+  
+  #fear-index-24h .fear-greed-gauge {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 70px !important;
+  }
+  
+  #fear-index-24h h3 {
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+    font-size: 14px !important;
+  }
+  
+  #fear-index-24h .gauge-value {
+    font-size: 16px !important;
+    position: static !important;
+    margin: 5px auto !important;
+  }
+  
+  #fear-index-24h .gauge-classification {
+    font-size: 14px !important;
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Force all child elements to respect the parent height */
+  #fear-index-24h * {
+    max-height: 100% !important;
+  }
+  .price-range {
+    height: 150px !important; /* Match the new BTC dominance height */
+  }
+  
+  /* Make all three cards in the third row have consistent styling */
+  .global-stats-row:nth-child(3) .global-stat-card {
+    min-height: 150px !important;
+    height: 150px !important;
+  }
+}
+
+
+/* Very small devices */
+@media (max-width: 360px) {
   .global-stats-row {
-    grid-template-columns: 1fr !important;
-    gap: 10px;
+    gap: 4px;
   }
   
   .global-stat-card {
-    padding: 10px;
-    min-height: auto;
-  }
-  
-  /* Whale trades adjustments */
-  .whale-trade-item {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-  
-  .trade-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-  
-  .trade-price-info {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-  
-  .whale-trade-time {
-    margin-left: 0;
-    width: 100%;
-    text-align: right;
-    font-size: 10px;
-  }
-  
-  .trade-analytics {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-  }
-  
-  .whale-legend {
-    padding: 8px 5px;
-  }
-  
-  .legend-item {
-    margin: 2px 4px;
-    font-size: 11px;
-  }
-  
-  /* Trending section adjustments */
-  .trending-card {
-    padding: 10px;
-  }
-  
-  .coin-info {
-    gap: 5px;
-  }
-  
-  .coin-logo {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .coin-name {
-    font-size: 14px;
-  }
-  
-  .coin-symbol {
-    font-size: 12px;
-  }
-  
-  .coin-price {
-    font-size: 14px;
-  }
-  
-  .coin-change {
-    font-size: 12px;
-    padding: 2px 6px;
-  }
-  
-  /* Coin details adjustments */
-  .coin-details-section {
-    padding: 10px;
-  }
-  
-  .coin-stats-box {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  
-  .stat-item {
     padding: 6px;
   }
   
-  .stat-item span {
-    font-size: 11px;
-  }
-  
-  .stat-item div {
-    font-size: 13px;
-  }
-  
-  /* Advanced metrics adjustments */
-  .metrics-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  .squeeze-data-container, .buying-strength-container {
-    padding: 12px;
-  }
-  
-  .squeeze-data-container h3, .buying-strength-container h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .squeeze-stats, .strength-stats {
-    gap: 5px;
-  }
-  
-  .squeeze-stat span, .strength-stat span {
+  .global-stat-card h3 {
     font-size: 10px;
   }
   
-  .squeeze-stat div, .strength-stat div {
-    font-size: 12px;
+  .global-stat-card .stat-value {
+    font-size: 11px;
   }
 }
 
@@ -2800,6 +2822,74 @@ gauge-container {
   font-size: 16px;
   margin-right: 5px;
 }
+/* Improve the global stats cards layout */
+.global-stats-row:nth-child(1),
+.global-stats-row:nth-child(2) {
+  grid-template-columns: 1fr 1fr 1fr 1fr !important; /* Four equal columns for first two rows */
+  gap: 10px;
+}
+
+/* Make the cards more compact */
+#global-marketcap, 
+#global-volume,
+#btc-founding-rate,
+#eth-founding-rate {
+  min-height: 80px !important;
+  height: auto !important;
+  padding: 10px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adjust the stat titles */
+.global-stat-card .stat-title,
+.global-stat-card h3 {
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Adjust the stat values */
+.global-stat-card .stat-value {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Ensure the funding rates are properly styled */
+#btc-founding-rate .stat-value,
+#eth-founding-rate .stat-value {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+  .global-stats-row:nth-child(1),
+  .global-stats-row:nth-child(2) {
+    grid-template-columns: 1fr 1fr !important; /* Two columns on mobile */
+  }
+  
+  #global-marketcap, 
+  #global-volume,
+  #btc-founding-rate,
+  #eth-founding-rate {
+    min-height: 60px !important;
+    padding: 8px !important;
+  }
+  
+  .global-stat-card .stat-title,
+  .global-stat-card h3 {
+    font-size: 12px;
+  }
+  
+  .global-stat-card .stat-value {
+    font-size: 14px;
+  }
+}
 /* Optimize time frames and make coins smaller for mobile */
 @media (max-width: 768px) {
   /* Time frame buttons - make them smaller and more compact */
@@ -3468,6 +3558,118 @@ gauge-container {
 .news-date {
   font-weight: 500;
 }
+/* Add this to your existing CSS section */
+/* Mobile-friendly market data components */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+/* Fear meter styles for mobile */
+.fear-meter {
+  width: 100%;
+  height: 15px;
+  background: linear-gradient(to right, 
+    #ff4757 0%, /* Extreme Fear */
+    #ffa502 25%, /* Fear */
+    #ffdd59 50%, /* Neutral */
+    #1dd1a1 75%, /* Greed */
+    #2ed573 100% /* Extreme Greed */
+  );
+  border-radius: 8px;
+  position: relative;
+  margin: 10px 0;
+}
+
+.fear-indicator {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.fear-value {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Price range bar for mobile */
+.price-range-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #333;
+  border-radius: 3px;
+  position: relative;
+  margin: 10px 0;
+}
+
+.range-values {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Media queries to switch between mobile and desktop versions */
+/* Update the mobile/desktop visibility rules */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+  
+  .desktop-only {
+    display: none !important; /* Added !important to ensure it's hidden */
+  }
+  
+  /* Hide day range completely on mobile */
+  .global-stat-card.price-range {
+    display: none;
+  }
+  
+  /* Make the fear gauge and BTC dominance take up more space */
+  .global-stats-row {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  /* Ensure gauge elements are properly hidden */
+  .gauge-container, 
+  .gauge-classification, 
+  .gauge-value {
+    display: none !important;
+  }
+  
+  /* Show only the mobile fear meter */
+  .fear-index-container.mobile-only {
+    display: block;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .global-stats-row {
+    grid-template-columns: 1fr !important; /* Stack all cards on very small screens */
+  }
+  
+  /* Make BTC dominance and fear index full width */
+  .global-stat-card#btc-dominance,
+  .global-stat-card.fear-greed-gauge {
+    width: 99%;
+    
+  }
+  
+}
+/* ... existing CSS ... */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -3651,69 +3853,90 @@ gauge-container {
   <main class="container">
     <!-- Global Stats -->
     <!-- Update the global stats container HTML structure -->
-    <div class="global-stats-container">
-      <!-- First row: Market Cap and BTC Funding Rate -->
-      <div class="global-stats-row">
-        <div class="global-stat-card" id="global-marketcap">
-          <div class="stat-title">Global Market Cap</div>
-          <div class="stat-loading">Loading...</div>
-          <div class="stat-value" style="display: none;"></div>
-        </div>
-        
-        <div class="global-stat-card" id="btc-founding-rate">
-          <h3>BTC Funding Rate</h3>
-          <div class="stat-loading">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-          <p class="stat-value founding-rate" style="display:none; color: var(--text-primary)"></p>
-        </div>
-      </div>
-      
-      <!-- Second row: 24h Volume and ETH Funding Rate -->
-      <div class="global-stats-row">
-        <div class="global-stat-card" id="global-volume">
-          <div class="stat-title">24h Volume</div>
-          <div class="stat-loading">Loading...</div>
-          <div class="stat-value" style="display: none;"></div>
-        </div>
-        
-        <div class="global-stat-card" id="eth-founding-rate">
-          <h3>ETH Funding Rate</h3>
-          <div class="stat-loading">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-          <p class="stat-value founding-rate" style="display:none; color: var(--text-primary)"></p>
-        </div>
-      </div>
-      
-      <!-- Third row: Technical Gauge, Day Range, and BTC Dominance Chart -->
-        <!-- Third row: Technical Gauge, Day Range, and BTC Dominance Chart -->
-        <div class="global-stats-row" style="grid-template-columns: 1fr 1fr 1fr;">
-          <div class="global-stat-card fear-greed-gauge" style="min-height: 150px; padding: 10px; background: transparent; border: 2.5px solid var(--cardbg);">
-            <h3 class="gauge-title" style="font-size: 14px; margin-bottom: 5px;text-align: center; ">Fear Index 24H </h3>
-            <div class="gauge-container" style="height: 100px; width: 200px;">
-              <div class="gauge-background" style="width: 100%; left: 0;"></div>
-              <div class="gauge-labels">
-                <span class="gauge-label label-strong-sell"></span>
-                <span class="gauge-label label-sell"></span>
-                <span class="gauge-label label-neutral"></span>
-                <span class="gauge-label label-buy"></span>
-                <span class="gauge-label label-strong-buy"></span>
-              </div>
-              <div class="gauge-needle" id="gaugeNeedle"></div>
-            </div>
-            <div class="gauge-classification" id="gaugeClassification" style="font-size: 14px; margin-top: 5px;">Neutral</div>
-            <div class="gauge-value" id="gaugeValue" style="font-size: 14px; width: 35px; height: 35px;">50</div>
-          </div>
-          
-  
+    <!-- Update the global stats container HTML structure -->
+<div class="global-stats-container">
+  <!-- First row: Market Cap and BTC Funding Rate, 24h Volume, ETH Funding Rate -->
+  <div class="global-stats-row">
+    <div class="global-stat-card" id="global-marketcap">
+      <div class="stat-title">Global Market Cap</div>
+      <div class="stat-loading">Loading...</div>
+      <div class="stat-value" style="display: none;"></div>
+    </div>
     
-    <div class="global-stat-card price-range" style="background: transparent; border: 2.5px solid var(--cardbg);">
-      <h3 class="range-title">Day Range</h3>
+    <div class="global-stat-card" id="btc-founding-rate">
+      <h3>BTC Funding Rate</h3>
+      <div class="stat-loading">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <p class="stat-value founding-rate" style="display:none; color: var(--text-primary)"></p>
+    </div>
+    
+    <div class="global-stat-card" id="global-volume">
+      <div class="stat-title">24h Volume</div>
+      <div class="stat-loading">Loading...</div>
+      <div class="stat-value" style="display: none;"></div>
+    </div>
+    
+    <div class="global-stat-card" id="eth-founding-rate">
+      <h3>ETH Funding Rate</h3>
+      <div class="stat-loading">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <p class="stat-value founding-rate" style="display:none; color: var(--text-primary)"></p>
+    </div>
+  </div>
+  
+  <!-- Third row: Technical Gauge, Day Range, and BTC Dominance Chart -->
+  <div class="global-stats-row" style="grid-template-columns: 1fr 1fr 1fr;">
+
+ <!-- Update the Fear Index gauge for better mobile display -->
+<div class="global-stat-card fear-greed-gauge" style="min-height: 150px; padding: 10px; background: transparent; border: 2.5px solid var(--cardbg);">
+  <h3 class="gauge-title" style="font-size: 14px; margin-bottom: 5px;text-align: center; ">Fear Index 24H </h3>
+  
+  <!-- Mobile version - horizontal bar with indicator -->
+  <div class="fear-index-container mobile-only">
+    <div class="fear-meter">
+      <div class="fear-indicator" style="left: 32%;"></div>
+    </div>
+    <div class="fear-value">32 - Fear</div>
+  </div>
+  
+  <!-- Desktop version - gauge -->
+  <div class="gauge-container desktop-only" style="height: 100px; width: 200px;">
+    <div class="gauge-background" style="width: 100%; left: 0;"></div>
+    <div class="gauge-labels">
+      <span class="gauge-label label-strong-sell"></span>
+      <span class="gauge-label label-sell"></span>
+      <span class="gauge-label label-neutral"></span>
+      <span class="gauge-label label-buy"></span>
+      <span class="gauge-label label-strong-buy"></span>
+    </div>
+    <div class="gauge-needle" id="gaugeNeedle"></div>
+  </div>
+  <div class="gauge-classification desktop-only" id="gaugeClassification" style="font-size: 14px; margin-top: 5px;">Neutral</div>
+  <div class="gauge-value desktop-only" id="gaugeValue" style="font-size: 14px; width: 35px; height: 35px;">50</div>
+</div>
+  
+  <!-- Update Day Range for mobile -->
+  <div class="global-stat-card price-range" style="background: transparent; border: 2.5px solid var(--cardbg);">
+    <h3 class="range-title">Day Range</h3>
+    <!-- Add this simplified version for mobile -->
+    <div class="day-range-container mobile-only">
+      <div class="current-price" id="currentPriceMobile">$84,402.95</div>
+      <div class="price-range-bar">
+        <div class="range-indicator" style="left: 65%;"></div>
+      </div>
+      <div class="range-values">
+        <span class="range-low" id="dayLowMobile">$83,175</span>
+        <span class="range-high" id="dayHighMobile">$84,584</span>
+      </div>
+    </div>
+    <!-- Keep existing version for desktop -->
+    <div class="desktop-only">
       <div class="range-container">
         <span class="range-value" id="dayLow">$--</span>
         <div class="range-bar">
@@ -3724,17 +3947,24 @@ gauge-container {
         <span class="range-value" id="dayHigh">$--</span>
       </div>
       <div class="current-price" id="currentPrice">$--</div>
-      <!-- New chart container -->
       <div class="range-chart-container">
         <canvas id="btcRangeChart"></canvas>
       </div>
     </div>
-    
-    <div class="global-stat-card" id="btc-dominance">
-      <div class="btc-header">
-        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="BTC" class="btc-icon">
-        <span class="btc-name">BTC</span>
-      </div>
+  </div>
+  
+  <!-- Update BTC Dominance for mobile -->
+  <div class="global-stat-card" id="btc-dominance">
+    <div class="btc-header">
+      <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="BTC" class="btc-icon">
+      <span class="btc-name">BTC</span>
+    </div>
+    <!-- Add this simplified version for mobile -->
+    <div class="mobile-only">
+      <div class="stat-value" style="display:block; text-align:center; font-size:18px; margin-top:10px;">42.3%</div>
+    </div>
+    <!-- Keep existing version for desktop -->
+    <div class="desktop-only">
       <div class="stat-loading">
         <span class="dot"></span>
         <span class="dot"></span>
@@ -3747,6 +3977,7 @@ gauge-container {
     </div>
   </div>
 </div>
+<!-- ... existing code ... -->
   </main>
       <!-- REMOVE the duplicate funding rates section that was outside the row -->
       
