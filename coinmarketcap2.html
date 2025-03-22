@@ -242,6 +242,18 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
+  .settings-btn {
+    font-size: 6.8rem; /* Increased from default size */
+    padding: 8px; /* Add some padding for a larger touch target */
+    width: 40px; /* Set explicit width */
+    height: 40px; /* Set explicit height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-right {
+    gap: 12px; /* Ensure enough space between elements */
+  }
   
   /* Logo and brand */
   .brand-logo {
@@ -2368,6 +2380,7 @@ gauge-container {
   gap: 8px;
 }
 
+
 .sorting-buttons button {
   background: transparent;
   color: var(--text-secondary);
@@ -2596,6 +2609,146 @@ gauge-container {
 .refresh-indicator.paused {
   animation-play-state: paused;
   opacity: 0.7;
+}
+/* Mobile bottom navigation bar - only visible on screens 768px or smaller */
+/* Enhanced Mobile Bottom Navigation */
+/* Enhanced Mobile Bottom Navigation */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--primary-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border-color);
+  padding: 12px 0;
+  z-index: 1000;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mobile-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 0;
+  width: 25%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.mobile-nav-btn:hover, .mobile-nav-btn.active {
+  color: var(--buttonbg);
+}
+
+.mobile-nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 3px;
+  background-color: var(--buttonbg);
+  border-radius: 3px 3px 0 0;
+}
+
+.mobile-nav-btn i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-btn:hover i, .mobile-nav-btn.active i {
+  transform: translateY(-2px);
+}
+
+.mobile-nav-btn span {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.mobile-nav-btn img {
+  width: 26px;
+  height: 26px;
+  border-radius: 0; /* Changed to 0 for completely square corners */
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
+  
+}
+
+.mobile-nav-btn:hover img, .mobile-nav-btn.active img {
+  transform: translateY(-2px);
+}
+.mobile-nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 3px;
+  background-color: var(--buttonbg);
+  border-radius: 3px 3px 0 0;
+}
+
+.mobile-nav-btn i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-btn:hover i, .mobile-nav-btn.active i {
+  transform: translateY(-2px);
+}
+
+.mobile-nav-btn span {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.mobile-nav-btn img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav-btn:hover img, .mobile-nav-btn.active img {
+  transform: translateY(-2px);
+}
+
+/* Show the mobile navigation on screens 768px or smaller */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: block;
+  }
+  
+  /* Add padding to the bottom of the body to prevent content from being hidden behind the nav bar */
+  body {
+    padding-bottom: 80px;
+  }
+}
+
+/* Light theme specific styles */
+:root[data-theme="light"] .mobile-bottom-nav {
+  background-color: rgba(245, 245, 245, 0.95);
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes spin {
@@ -4486,6 +4639,29 @@ gauge-container {
              <!-- Trending coin cards will be injected here -->
            </div>
          </div>
+         <!-- Mobile Bottom Navigation - Only visible on screens 768px or smaller -->
+<!-- Mobile Bottom Navigation - Only visible on screens 768px or smaller -->
+<div class="mobile-bottom-nav">
+  <div class="mobile-nav-buttons">
+    <a href="#" class="mobile-nav-btn active">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" id="zenos-nav-btn">
+      <!-- Updated to use the dark theme image by default -->
+      <img src="zenosdark.png" alt="Zenos AI" id="zenos-icon" style="border-radius: 0;">
+      <span>Zenos AI</span>
+    </a>
+    <a href="#" class="mobile-nav-btn">
+      <i class="fas fa-user-circle"></i>
+      <span>Profile</span>
+    </a>
+    <a href="#" class="mobile-nav-btn">
+      <i class="fas fa-wallet"></i>
+      <span>Wallet</span>
+    </a>
+  </div>
+</div>
      </main>
      <script>
 
@@ -6780,7 +6956,47 @@ function updateSqueezeValue(value) {
     squeezeFill.offsetHeight;
   }
 }
+// Add this to your existing JavaScript
+// Theme-specific Zenos AI icon
+function updateThemeElements() {
+  // Force a refresh of the image by adding a timestamp
+  const timestamp = new Date().getTime();
+  const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+  const zenosIcon = document.getElementById('zenos-icon');
+  
+  if (zenosIcon) {
+    // Force image reload by adding a timestamp parameter
+    if (isLightTheme) {
+      zenosIcon.src = `zenoslight.png?t=${timestamp}`;
+    } else {
+      zenosIcon.src = `zenosdark.png?t=${timestamp}`;
+    }
+    
+    // Make sure it's square
+    zenosIcon.style.borderRadius = '0';
+    
+    // Log for debugging
+    console.log("Theme is now:", isLightTheme ? "light" : "dark");
+    console.log("Zenos icon set to:", zenosIcon.src);
+  }
+}
 
+// Make sure we're properly detecting theme changes
+document.getElementById('themeSwitch').addEventListener('change', function() {
+  // Give the DOM time to update the theme attribute
+  setTimeout(function() {
+    updateThemeElements();
+    // Force a repaint
+    document.body.style.display = 'none';
+    document.body.offsetHeight; // Trigger a reflow
+    document.body.style.display = '';
+  }, 150);
+});
+
+// Also update on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateThemeElements();
+});
   </script>
 </body>
 </html>
