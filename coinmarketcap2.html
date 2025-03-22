@@ -77,8 +77,7 @@
 /* Fix the section heading */
 .section-heading {
   text-align: center;
-  margin-bottom: 1.5rem; /* Reduced from 2.5rem */
-  margin-top: 1rem;
+  margin-bottom: 2rem;
   font-size: 16px;
   font-weight: bold;
   margin-left: auto;
@@ -1185,7 +1184,7 @@
     }
 
     /* Update the sentiment grid to have proper padding and spacing */
-    .sentiment-grid {
+.sentiment-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 15px; /* Reduced from 24px */
@@ -1198,8 +1197,8 @@
 .section-title {
   font-size: 20px;
   font-weight: bold;
-  margin: 10px 24px; /* Reduced from 15px 24px */
-  
+  margin: 24px 24px; /* Increased from 16px */
+  color: #bab7b7;
 }
 
 /* Add margin to the stat-card for fear-greed */
@@ -1324,8 +1323,7 @@
 /* Add spacing to the section heading for trending */
 .section-heading {
   text-align: center; /* Center the text within the element */
-  margin-bottom: 1.5rem; /* Reduced from 2.5rem */
-  margin-top: 1rem;
+  margin-bottom: 2.5rem;
   font-size: 17px;
   font-weight: bold;
   margin-left: auto; /* Changed from 200px to auto */
@@ -1815,7 +1813,6 @@ gauge-container {
 /* Global Stats Container Styles */
 .global-stats-container {
   width: 100%;
-  margin-top: 5px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -1971,6 +1968,11 @@ gauge-container {
     border: 2px solid var(--cardbg); /* Standard border */
     width: 100%; /* Maintain original width */
   }
+  /* Add this new rule to hide whale trades on mobile */
+  .whale-trades-container {
+    display: none !important;
+  }
+  
   
   #btc-dominance .btc-header {
     position: static;
@@ -2199,13 +2201,13 @@ gauge-container {
     /* Section Divider Styles */
         /* Section Divider Styles - Enhanced version */
         .section-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem auto 0.5rem; /* Reduced from 2.5rem auto 1rem */
-  width: 90%;
-  position: relative;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2.5rem auto 1rem;
+      width: 90%;
+      position: relative;
+    }
     
     .divider-line {
       height: 2px;
@@ -2336,13 +2338,7 @@ gauge-container {
 /* Adjust sorting buttons to match new style */
 .sorting-buttons {
   display: flex;
-  gap: 8px; /* Reduced from 10px */
-  margin-bottom: 8px; /* Reduced from 10px */
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  width: fit-content;
-  padding-left: 15px;
+  gap: 8px;
 }
 
 .sorting-buttons button {
@@ -3632,35 +3628,122 @@ gauge-container {
 
 /* Media queries to switch between mobile and desktop versions */
 /* Update the mobile/desktop visibility rules */
+/* Media queries to switch between mobile and desktop versions */
 @media (max-width: 768px) {
   .mobile-only {
     display: block;
   }
   
   .desktop-only {
-    display: none !important; /* Added !important to ensure it's hidden */
-  }
-  
-  /* Hide day range completely on mobile */
-  .global-stat-card.price-range {
-    display: none;
-  }
-  
-  /* Make the fear gauge and BTC dominance take up more space */
-  .global-stats-row {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  
-  /* Ensure gauge elements are properly hidden */
-  .gauge-container, 
-  .gauge-classification, 
-  .gauge-value {
     display: none !important;
   }
   
-  /* Show only the mobile fear meter */
-  .fear-index-container.mobile-only {
-    display: block;
+  /* Hide funding rates on mobile */
+  #btc-founding-rate,
+  #eth-founding-rate {
+    display: none !important;
+  }
+  
+  /* Rearrange the global stats for mobile */
+  .global-stats-row:nth-child(1) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 10px !important;
+  }
+  
+  /* Position the cards in the grid */
+  #global-marketcap, 
+  #global-volume {
+    min-height: 60px !important;
+    padding: 8px !important;
+  }
+  
+  /* Show Fear Index and BTC dominance in the first row */
+  #fear-index-24h,
+  #btc-dominance {
+    display: block !important;
+    min-height: 60px !important;
+    padding: 8px !important;
+  }
+  
+  /* Hide the second row that normally contains Fear Index and BTC dominance */
+  .global-stats-row:nth-child(2) {
+    display: none !important;
+  }
+  
+  /* Adjust card styles for mobile */
+  .global-stat-card .stat-title,
+  .global-stat-card h3 {
+    font-size: 12px;
+  }
+  
+  .global-stat-card .stat-value {
+    font-size: 14px;
+  }
+  
+  /* Hide whale trades on mobile */
+  .whale-trades-container {
+    display: none !important;
+  }
+  
+  /* Other mobile styles */
+  .whale-trades-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .whale-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .whale-trade-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .trade-header {
+    width: 100%;
+  }
+  
+  /* Tighten up the crypto controls */
+  .crypto-controls {
+    margin-bottom: 8px;
+  }
+  
+  .search-container {
+    margin: 5px auto;
+  }
+  
+  /* Make filter buttons more compact */
+  .filter-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  .theme-filter-buttons, 
+  .time-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .theme-filter-btn, 
+  .time-filter-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  /* Move market overview section up slightly */
+  #trending {
+    margin-top: -10px;
   }
 }
 
@@ -3678,7 +3761,135 @@ gauge-container {
   }
   
 }
-/* ... existing CSS ... */
+/* ... existing code ... */
+@media (max-width: 768px) {
+  .whale-trades-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .whale-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .whale-trade-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Hide the show whale trades button on mobile */
+  #show-whale-trades-btn {
+    display: none;
+  }
+  
+  .trade-header {
+    width: 100%;
+  }
+  /* ... existing code ... */
+.section-divider {
+  margin: 10px auto; /* Changed from 10px 0 to 10px auto to center */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Added to ensure centering */
+  width: 80%; /* Added width constraint to center properly */
+  max-width: 800px; /* Added max-width for larger screens */
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.divider-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 15px;
+  position: relative;
+}
+
+.section-title-container {
+    margin-bottom: 20px;
+  }
+
+.section-subtitle {
+  margin: 5px 0;
+  font-size: 16px;
+  text-align: center; /* Added to ensure text is centered */
+  display: block; /* Changed to block to ensure full width */
+}
+/* ... existing code ... */
+  
+  /* Tighten up the crypto controls */
+  .crypto-controls {
+    margin-bottom: 8px; /* Reduced bottom margin */
+  }
+  
+  .search-container {
+    margin: 5px auto; /* Reduced margin */
+  }
+  
+  /* Make filter buttons more compact */
+  .filter-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Increased gap between button groups */
+    margin-top: 15px; /* Add more space after the Market Overview title */
+  }
+  
+  .theme-filter-buttons, 
+  .time-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .theme-filter-btn, 
+  .time-filter-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    margin: 0; /* Remove margin to use gap instead */
+  }
+  
+  /* Move market overview section up slightly */
+  #trending {
+    margin-top: -10px; /* Negative margin to pull content up */
+  }
+  .search-container {
+  width: 25%; /* Reduced from 90% */
+  max-width: 300px; /* Added max-width constraint */
+  margin: 0 auto 15px;
+  position: relative; /* Ensure proper positioning */
+}
+
+/* Adjust input field inside search container */
+.search-container input {
+  width: 100%;
+  font-size: 14px; /* Slightly smaller font */
+  padding: 8px 12px; /* Reduced padding */
+  padding-right: 30px; /* Add space for the icon on the right */
+}
+
+/* Move search icon to the right */
+.search-icon {
+  display: none;
+  position: absolute;
+  right: 60px; /* Position from right instead of left */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none; /* Prevent icon from interfering with clicks */
+}
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -3816,7 +4027,6 @@ gauge-container {
   <a href="#"><i class="fas fa-chart-line"></i> Deep Charts</a>
   <a href="#"><i class="fas fa-chart-pie"></i> ETF</a>
   <a href="#"><i class="fas fa-newspaper"></i> News</a>
-  <a href="#" id="whaleTradesLink"><i class="fas fa-water"></i> Whale Trades</a>
   <a href="#"><i class="fas fa-box"></i> Products</a>
   <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
   <a href="#"><i class="fas fa-user-plus"></i> Sign Up</a>
@@ -4167,16 +4377,11 @@ gauge-container {
    
         <!-- Replace the existing whale trades container with this improved version -->
         <div class="trending" id="trending">
-           <!-- Remove this button -->
-  <!-- <button id="show-whale-trades-btn" class="show-more-btn">
-    <span>Show Whale Trades</span>
-    <i class="fas fa-chevron-down"></i>
-  </button> -->
-  
-  <!-- Remove or comment out the whale trades container -->
-  <!-- <div id="whale-trades-container" class="whale-trades-container" style="display: none;">
-    ... whale trades content ...
-  </div> -->
+          <!-- Add this button before the whale trades container -->
+          <button id="show-whale-trades-btn" class="show-more-btn">
+            <span>Show Whale Trades</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
           
           <!-- Modify the whale trades container to be hidden by default -->
           <div id="whale-trades-container" class="whale-trades-container" style="display: none;">
@@ -4218,10 +4423,11 @@ gauge-container {
           <div class="section-title-container">
             <h3 class="section-subtitle">Market Overview</h3>
           </div>
+           
            <!-- Search and filter controls -->
            <div class="crypto-controls">
              <div class="search-container">
-               <input type="text" id="cryptoSearch" placeholder="Search cryptocurrencies..." class="crypto-search">
+               <input type="text" id="cryptoSearch" placeholder="Search " class="crypto-search">
                <i class="fas fa-search search-icon"></i>
              </div>
              <div class="filter-controls">
@@ -6547,8 +6753,6 @@ function updateSqueezeValue(value) {
     squeezeFill.offsetHeight;
   }
 }
-
-
 
   </script>
 </body>
