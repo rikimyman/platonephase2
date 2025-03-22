@@ -20,7 +20,7 @@
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --accent: #4a4a4a;
-    --cardbg: #2a2a2a;
+    --cardbg: #5f5e5e;
     --buttonbg: #ffffff;
     --graph-primary: #ffffff;
     --graph-secondary: #a0a0a0;
@@ -37,7 +37,7 @@
     --text-secondary: #555555;
     --accent: #e0e0e0;
     --text-gab: #976f2a;
-    --cardbg: #ffffff;
+    --cardbg: #dfdbdb;
     --buttonbg: #333333;
     --graph-primary: #333333;
     --graph-secondary: #555555;
@@ -77,7 +77,8 @@
 /* Fix the section heading */
 .section-heading {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem; /* Reduced from 2.5rem */
+  margin-top: 1rem;
   font-size: 16px;
   font-weight: bold;
   margin-left: auto;
@@ -1184,21 +1185,21 @@
     }
 
     /* Update the sentiment grid to have proper padding and spacing */
-.sentiment-grid {
+    .sentiment-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px; /* Increased from 16px */
-  padding: 0 24px; /* Increased from 16px */
-  margin: 24px 0; /* Added top and bottom margin */
-  justify-content: center; /* Center the cards */
+  gap: 15px; /* Reduced from 24px */
+  padding: 0 24px;
+  margin: 15px 0; /* Reduced from 24px */
+  justify-content: center;
 }
 
 /* Add margin to the section title to align with the grid */
 .section-title {
   font-size: 20px;
   font-weight: bold;
-  margin: 24px 24px; /* Increased from 16px */
-  color: #bab7b7;
+  margin: 10px 24px; /* Reduced from 15px 24px */
+  
 }
 
 /* Add margin to the stat-card for fear-greed */
@@ -1323,7 +1324,8 @@
 /* Add spacing to the section heading for trending */
 .section-heading {
   text-align: center; /* Center the text within the element */
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem; /* Reduced from 2.5rem */
+  margin-top: 1rem;
   font-size: 17px;
   font-weight: bold;
   margin-left: auto; /* Changed from 200px to auto */
@@ -1813,6 +1815,7 @@ gauge-container {
 /* Global Stats Container Styles */
 .global-stats-container {
   width: 100%;
+  margin-top: 5px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -2196,13 +2199,13 @@ gauge-container {
     /* Section Divider Styles */
         /* Section Divider Styles - Enhanced version */
         .section-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 2.5rem auto 1rem;
-      width: 90%;
-      position: relative;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto 0.5rem; /* Reduced from 2.5rem auto 1rem */
+  width: 90%;
+  position: relative;
+}
     
     .divider-line {
       height: 2px;
@@ -2333,7 +2336,13 @@ gauge-container {
 /* Adjust sorting buttons to match new style */
 .sorting-buttons {
   display: flex;
-  gap: 8px;
+  gap: 8px; /* Reduced from 10px */
+  margin-bottom: 8px; /* Reduced from 10px */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  width: fit-content;
+  padding-left: 15px;
 }
 
 .sorting-buttons button {
@@ -3807,6 +3816,7 @@ gauge-container {
   <a href="#"><i class="fas fa-chart-line"></i> Deep Charts</a>
   <a href="#"><i class="fas fa-chart-pie"></i> ETF</a>
   <a href="#"><i class="fas fa-newspaper"></i> News</a>
+  <a href="#" id="whaleTradesLink"><i class="fas fa-water"></i> Whale Trades</a>
   <a href="#"><i class="fas fa-box"></i> Products</a>
   <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
   <a href="#"><i class="fas fa-user-plus"></i> Sign Up</a>
@@ -4157,11 +4167,16 @@ gauge-container {
    
         <!-- Replace the existing whale trades container with this improved version -->
         <div class="trending" id="trending">
-          <!-- Add this button before the whale trades container -->
-          <button id="show-whale-trades-btn" class="show-more-btn">
-            <span>Show Whale Trades</span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
+           <!-- Remove this button -->
+  <!-- <button id="show-whale-trades-btn" class="show-more-btn">
+    <span>Show Whale Trades</span>
+    <i class="fas fa-chevron-down"></i>
+  </button> -->
+  
+  <!-- Remove or comment out the whale trades container -->
+  <!-- <div id="whale-trades-container" class="whale-trades-container" style="display: none;">
+    ... whale trades content ...
+  </div> -->
           
           <!-- Modify the whale trades container to be hidden by default -->
           <div id="whale-trades-container" class="whale-trades-container" style="display: none;">
@@ -4203,7 +4218,6 @@ gauge-container {
           <div class="section-title-container">
             <h3 class="section-subtitle">Market Overview</h3>
           </div>
-           
            <!-- Search and filter controls -->
            <div class="crypto-controls">
              <div class="search-container">
@@ -6533,6 +6547,8 @@ function updateSqueezeValue(value) {
     squeezeFill.offsetHeight;
   }
 }
+
+
 
   </script>
 </body>
